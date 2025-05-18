@@ -122,6 +122,30 @@ class SolutionSort {
 
     }
 
+    public int[] sortCount(int[] nums){
+        int c = 2*50000+1;
+        int[] count = new int[c];
+        int max = nums[0];
+        for(int num : nums){
+            max = Math.max(max,num);
+            count[num+50000]++;
+        }
+
+        int index = 0;
+
+        int l = max+50000+1;
+        for(int id = 0;id < l;id++){
+            int feq = count[id];
+            while(feq !=0){
+                nums[index] = id-50000;
+                index++;
+                feq--;
+            }
+        }
+
+        return nums;
+    }
+
 
 }
 public class SortArray {
@@ -131,6 +155,7 @@ public class SortArray {
         int[] nums2 = new int[]{4,6,2,5,7,9,1,3};
 
         int[]nums3 = new int[]{4,6,2,5,7,9,1,3};
+        int[]nums4 = new int[]{-4,-49500,2,5,7,9,1,3};
         System.out.println(System.currentTimeMillis());
         sort.sortArray(nums);
         System.out.println(System.currentTimeMillis());
@@ -152,6 +177,14 @@ public class SortArray {
         System.out.println(System.currentTimeMillis());
 
         for(int n : nums3)
+            System.out.println(n);
+
+        System.out.println("***********************");
+        System.out.println(System.currentTimeMillis());
+        sort.sortCount(nums4);
+        System.out.println(System.currentTimeMillis());
+
+        for(int n : nums4)
             System.out.println(n);
     }
 }

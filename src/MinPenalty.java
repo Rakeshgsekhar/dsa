@@ -1,5 +1,10 @@
 class SolutionMP {
     public int bestClosingTime(String customers) {
+        /**
+         * Time Complexity /space complexity
+         * //O(n + n + n + n) => O(4n) ~ O(n)
+         */
+        /**
         int n = customers.length();
         int[] pen = new int[n];
         int minPanalty = 0;
@@ -13,25 +18,6 @@ class SolutionMP {
         }
 
         int minHour = n;
-/*
-        for(int i = 0;i<n;i++){
-            int currPen =0;
-            for(int j = 0;j<n;j++) {
-                if(j<i){
-                    currPen+=pen[j];
-                }else {
-                    currPen += Math.abs(pen[j] - 1);
-                }
-            }
-            if(currPen<minPanalty){
-                minPanalty = currPen;
-                minHour = i;
-            }else if(currPen == minPanalty){
-                minHour = Math.min(minHour,i);
-            }
-        }
-
-        */
         int[] minPenArr = new int[n+1];
         minPenArr[n] = minPanalty;
         for(int i = n-1;i>=0;i--){
@@ -48,6 +34,24 @@ class SolutionMP {
                 minHour = i;
             }else if(minPenArr[i] == minPanalty){
                 minHour = Math.min(minHour,i);
+            }
+        }
+        return minHour;
+         */
+
+        int minHour = 0;
+        int minPanalty = 0;
+        int currentPenalty = 0;
+        for(int i = 0;i<customers.length();i++){
+            if(customers.charAt(i) == 'Y'){
+                currentPenalty--;
+            }else{
+                currentPenalty++;
+            }
+
+            if(currentPenalty<minPanalty){
+                minHour = i+1;
+                minPanalty = currentPenalty;
             }
         }
         return minHour;

@@ -120,15 +120,15 @@ public class AllOneDS {
         aone.inc("hello");
         aone.inc("hello");
         System.out.println(aone.getMaxKey());
-        System.out.println(aone.getMinKey());
+//        System.out.println(aone.getMinKey());
         aone.inc("leet");
         aone.inc("code");
         aone.inc("leet");
-        aone.inc("hello");
-        aone.dec("leet");
+        aone.dec("hello");
+        aone.inc("leet");
         aone.inc("code");
         aone.inc("code");
         System.out.println(aone.getMaxKey());
-        System.out.println(aone.getMinKey());
+//        System.out.println(aone.getMinKey());
     }
 }

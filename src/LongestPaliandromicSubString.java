@@ -34,13 +34,13 @@ class SolutionLPS {
         int n = s.length();
         int[][] dp = new int[n][n];
         for(int[] row:dp) Arrays.fill(row,-1);
-        compute(n-1,n-1,s,rs,dp);
+        compute(n-1,0,s,rs,dp);
         return "";
     }
     private int compute(int start, int end, String s,String rs,int [][]dp){
-      if(start<0 || end<0) return 0;
+      if(start<0 || end>=rs.length()) return 0;
       if(dp[start][end] != -1) return dp[start][end];
-      if(s.charAt(start)==rs.charAt(end)) dp[start][end] = 1+compute(start-1,end-1,s,rs,dp);
+      if(s.charAt(start)==rs.charAt(end)) dp[start][end] = 1+compute(start-1,end+1,s,rs,dp);
       else dp[start][end] = 0;
       if(dp[start][end]>max){
           endI = end;

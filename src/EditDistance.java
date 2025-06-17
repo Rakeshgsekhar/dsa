@@ -1,10 +1,6 @@
 import java.util.Arrays;
 
-public class EditDistance {
-    /**
-     * Levenshtein distance
-     * https://en.wikipedia.org/wiki/Levenshtein_distance
-     */
+class SolutionEDT{
     public int minDistance(String word1, String word2) {
         /*int m = word1.length(),n=word2.length();
         if(m==0) return n;
@@ -43,7 +39,8 @@ public class EditDistance {
         for(int i = 0;i<n;i++){
             Arrays.fill(memo[i],-1);
         }
-        return minDistanceRecMemo(n-1,m-1,word1,word2,memo);
+       // return minDistanceRecMemo(n-1,m-1,word1,word2,memo);
+         return minDistanceRecMemoP(0,m-1,word1,word2,memo);
     }
 
     private int minDistanceRec(int wd1,int wd2,String word1,String word2){
@@ -78,5 +75,34 @@ public class EditDistance {
         int replace = minDistanceRec(wd1-1,wd2-1,word1,word2);
 
         return memo[wd1][wd2]=1+Math.min(insert,Math.min(delete,replace));
+    }
+    private int minDistanceRecMemoP(int wd1,int wd2,String word1,String word2,int[][]memo){
+        if(wd1>=word1.length()){
+            return word2.length()-wd1;
+        }
+        if(wd2<0) return word1.length()-wd1;
+        if(memo[wd1][wd2] != -1) return memo[wd1][wd2];
+        if(word1.charAt(wd1) == word2.charAt(wd2)){
+            return memo[wd1][wd2]= minDistanceRecMemoP(wd1+1,wd2-1,word1,word2,memo);
+        }
+
+        int insert = minDistanceRecMemoP(wd1+1,wd2,word1,word2,memo);
+        int delete = minDistanceRecMemoP(wd1,wd2-1,word1,word2,memo);
+        int replace = minDistanceRecMemoP(wd1+1,wd2-1,word1,word2,memo);
+
+        return memo[wd1][wd2]=1+Math.min(insert,Math.min(delete,replace));
+    }
+}
+public class EditDistance {
+    /**
+     * Levenshtein distance
+     * https://en.wikipedia.org/wiki/Levenshtein_distance
+     */
+
+    public static void main(String[] args) {
+        SolutionEDT edit = new SolutionEDT();
+        String s = "leetcode";
+        String rs = s+new StringBuilder(s).reverse().toString();
+        System.out.println(edit.minDistance(s,rs));
     }
 }

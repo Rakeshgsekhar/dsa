@@ -34,7 +34,7 @@ class SolutionLPSS {
 public class LongestPaliandromicSubsequence {
     public static void main(String[] args) {
         SolutionLPSS lpss = new SolutionLPSS();
-        System.out.println(lpss.longestPalindromeSubseq("bbbab"));
+        System.out.println(lpss.longestPalindromeSubseq("leetcode"));
     }
 
 }

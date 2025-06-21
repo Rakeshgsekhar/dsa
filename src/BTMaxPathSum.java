@@ -8,28 +8,27 @@ import java.util.Map;
 class SolutionBTMPS {
     public int maxPathSum(TreeNode root) {
         Map<TreeNode, Integer> map = new HashMap<>();
-//        ArrayList<Integer> result = new ArrayList<Integer>();
-//        TreeNode node = root;
-//        toArrayHelp(node, result);
-        //return result;
-        return compute(root,map);
+        int[] res = {root.val};
+        compute(root,map,res);
+        return res[0];//
     }
-    private void toArrayHelp(TreeNode ref, ArrayList<Integer> result) {
-        if (ref == null) {
-            result.add(0);
-            return;
-        }
-        toArrayHelp(ref.left, result);
-        result.add(ref.val);
-
-        toArrayHelp(ref.right, result);
-    }
-
-    private int compute(TreeNode node,Map<TreeNode, Integer> map){
-        if(node == null) return 0;
+    private int compute(TreeNode node,Map<TreeNode, Integer> map,int[] res){
+         /*if(node == null) return 0;
         if(map.containsKey(node)) return map.get(node);
+        if()
+        int valLeft = (node.left!=null? node.left.val : 0);
+        int valRight = (node.right!=null? node.right.val : 0);
+        int currentSum = node.val +valLeft +valRight;
+        int leftSum = compute(node.left,map);
+        int rightSum = compute(node.right,map);
+
+        int max = Math.max(currentSum,Math.max(leftSum,rightSum));
+        map.put(node,max);
+        return max;*/
+        if(node == null) return 0;
+        //if(map.containsKey(node)) return map.get(node);
         int currentSum = 0;
-        if(node.left != null && node.right!=null) {
+        /*if(node.left != null && node.right!=null) {
              currentSum = node.val + node.right.val + node.left.val;
         }else{
             if(node.right == null && node.left!=null){
@@ -39,12 +38,12 @@ class SolutionBTMPS {
             }else{
                 currentSum = node.val;
             }
-        }
-        int leftSum = compute(node.left,map);
-        int rightSum = compute(node.right,map);
-        System.out.println(currentSum+leftSum+rightSum);
-        int max = Math.max(currentSum,Math.max(leftSum,rightSum));
-        map.put(node,max);
+        }*/
+        int leftSum = Math.max(0,compute(node.left,map,res));
+        int rightSum = Math.max(0,compute(node.right,map,res));
+        res[0] = Math.max(res[0],leftSum+rightSum+node.val);
+        int max = Math.max(leftSum,rightSum)+node.val;
+        //map.put(node,max);
         return max;
 
     }

@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-class Solution {
+class SolutionFROG {
     public int frogJump(int[] heights) {
 
         int n = heights.length;
@@ -33,7 +33,7 @@ class Solution {
 }
 public class FromJump {
     public static void main(String[] args) {
-        Solution s = new Solution();
+        SolutionFROG s = new SolutionFROG();
         int[]heights = new int[]{2, 1, 3, 5, 4};
         int[] heights1 = new int[]{7, 5, 1, 2, 6};
         System.out.println(s.frogJump(heights));
